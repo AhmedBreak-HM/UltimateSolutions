@@ -26,8 +26,8 @@ namespace UltimateSolutions.WebAPI.Controllers
         [HttpPost("CreateInvoice")]
         public async Task<ActionResult<int>> CreateMasterDetials(CreateInvoiceCommand createInvoiceCommand)
         {
-            return await _mediator.Send(createInvoiceCommand);
-            //return CreatedAtAction("GetUserById", new { controller = "Invoice", id = userToCreate.Id }, userToReturn);
+            var newInvoiceId = await _mediator.Send(createInvoiceCommand);
+            return CreatedAtAction("GetMasterById", new { controller = "Invoice", id = newInvoiceId }, newInvoiceId);
         }
     }
 }
